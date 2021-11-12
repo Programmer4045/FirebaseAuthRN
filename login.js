@@ -21,6 +21,22 @@ export default class Login extends Component {
     state[prop] = val;
     this.setState(state);
   }
+  
+  guestLogin = () => {
+     auth()
+  .signInAnonymously()
+  .then(() => {
+    console.log('User signed in anonymously');
+  })
+  .catch(error => {
+    if (error.code === 'auth/operation-not-allowed') {
+      console.log('Enable anonymous in your firebase console.');
+    }
+
+    console.error(error);
+  });
+  
+   }
 
   userLogin = () => {
     if(this.state.email === '' && this.state.password === '') {
